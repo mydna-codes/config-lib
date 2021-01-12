@@ -36,8 +36,6 @@ public class ConfigUserLimits {
     @ConfigValue(value = "pro.max-gene-length")
     private int proMaxGeneLength;
 
-    // TODO: Return based on logged in user
-
     public int getGuestMaxDnaLength() {
         return guestMaxDnaLength;
     }
