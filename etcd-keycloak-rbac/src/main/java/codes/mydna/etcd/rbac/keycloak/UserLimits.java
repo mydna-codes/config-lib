@@ -1,7 +1,7 @@
 package codes.mydna.etcd.rbac.keycloak;
 
-import codes.mydna.auth.common.Roles;
-import codes.mydna.auth.common.User;
+import codes.mydna.auth.common.models.User;
+import codes.mydna.auth.common.enums.Role;
 import codes.mydna.config.etcd.ConfigUserLimits;
 
 import javax.enterprise.context.ApplicationScoped;
@@ -19,13 +19,12 @@ public class UserLimits {
         if (user == null)
             return -1;
 
-        List<String> realmRoles = user.getRealmRoles();
+        List<Role> roles = user.getRoles();
 
-        if (realmRoles.contains(Roles.KeycloakRealmRole.ADMIN)
-                || realmRoles.contains(Roles.KeycloakRealmRole.PRO_USER))
+        if (roles.contains(Role.ADMIN) || roles.contains(Role.PRO_USER))
             return config.getProMaxDnaLength();
 
-        if (realmRoles.contains(Roles.KeycloakRealmRole.USER))
+        if (roles.contains(Role.USER))
             return config.getRegMaxDnaLength();
 
         return config.getGuestMaxDnaLength();
@@ -36,13 +35,12 @@ public class UserLimits {
         if (user == null)
             return -1;
 
-        List<String> realmRoles = user.getRealmRoles();
+        List<Role> roles = user.getRoles();
 
-        if (realmRoles.contains(Roles.KeycloakRealmRole.ADMIN)
-                || realmRoles.contains(Roles.KeycloakRealmRole.PRO_USER))
+        if (roles.contains(Role.ADMIN) || roles.contains(Role.PRO_USER))
             return config.getProMaxEnzymeLength();
 
-        if (realmRoles.contains(Roles.KeycloakRealmRole.USER))
+        if (roles.contains(Role.USER))
             return config.getRegMaxEnzymeLength();
 
         return config.getGuestMaxEnzymeLength();
@@ -53,13 +51,12 @@ public class UserLimits {
         if (user == null)
             return -1;
 
-        List<String> realmRoles = user.getRealmRoles();
+        List<Role> roles = user.getRoles();
 
-        if (realmRoles.contains(Roles.KeycloakRealmRole.ADMIN)
-                || realmRoles.contains(Roles.KeycloakRealmRole.PRO_USER))
+        if (roles.contains(Role.ADMIN) || roles.contains(Role.PRO_USER))
             return config.getProMaxGeneLength();
 
-        if (realmRoles.contains(Roles.KeycloakRealmRole.USER))
+        if (roles.contains(Role.USER))
             return config.getRegMaxGeneLength();
 
         return config.getGuestMaxGeneLength();
